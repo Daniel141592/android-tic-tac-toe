@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.daniel.tic_tac_toe.HomeFragment"
+        android:label="home_fragment"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_joinRoomFragment"
+            app:destination="@id/joinRoomFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_sendNickFragment"
+            app:destination="@id/sendNickFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/joinRoomFragment"
+        android:name="com.daniel.tic_tac_toe.JoinRoomFragment"
+        android:label="fragment_join_room"
+        tools:layout="@layout/fragment_join_room" >
+        <action
+            android:id="@+id/action_joinRoomFragment_to_sendNickFragment"
+            app:destination="@id/sendNickFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/sendNickFragment"
+        android:name="com.daniel.tic_tac_toe.SendNickFragment"
+        android:label="fragment_send_nick"
+        tools:layout="@layout/fragment_send_nick" >
+        <action
+            android:id="@+id/action_sendNickFragment_to_boardFragment"
+            app:destination="@id/boardFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/boardFragment"
+        android:name="com.daniel.tic_tac_toe.BoardFragment"
+        android:label="fragment_board"
+        tools:layout="@layout/fragment_board" />
+</navigation>

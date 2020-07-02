@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE resources [
+    <!ENTITY appname "Kółko i krzyżyk">
+    <!ENTITY hostname "test.node.server">
+    <!ENTITY port "3000">
+]>
+<resources>
+    <string name="app_name">&appname;</string>
+    <string name="home_fragment_label">Home Fragment</string>
+    <string name="send_nick_fragment_label">NewRoom Fragment</string>
+    <string name="join_room_fragment_label">JoinRoom Fragment</string>
+    <string name="board_fragment_label">Board Fragment</string>
+    <string name="result_fragment_label">Result Fragment</string>
+    <string name="new_room">Nowa gra</string>
+    <string name="join_room">Dołącz</string>
+    <string name="nick">Nick</string>
+    <string name="create">Utwórz</string>
+    <string name="url">http://&hostname;:&port;/api</string>
+    <string name="share_url">http://&hostname;:&port;/</string>
+    <string name="hostname">&hostname;</string>
+    <string name="kolko">Teraz kółko</string>
+    <string name="krzyzyk">Teraz krzyżyk</string>
+    <string name="new_room_text">Tworzenie nowej gry</string>
+    <string name="join_room_text">Dołączanie do istniejącej gry</string>
+    <string name="join_room_hint">Podaj identyfikator gry</string>
+    <string name="room_full_or_doesnt_exists">Gra jest pełna lub nie istnieje</string>
+    <string name="send">Wyślij</string>
+    <string name="empty_edittext">Musisz coś wpisać</string>
+    <string name="waiting">Oczekiwanie na gracza…</string>
+    <string name="wins">Wygrywa</string>
+    <string name="draw">Remis!</string>
+    <string name="revenge">Rewanż</string>
+    <string name="connection_error">Błąd połączenia z serwerem</string>
+    <string name="room_id">Identyfikator gry:</string>
+    <string name="share">Udostępnij</string>
+    <string name="invitation_text">zaprasza cię do zagrania w &appname;</string>
+</resources>

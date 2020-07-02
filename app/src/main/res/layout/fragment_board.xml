@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:orientation="horizontal"
+    tools:context=".BoardFragment">
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="50dp">
+
+        <TextView
+            android:id="@+id/textMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_span="3"
+            android:text="@string/waiting"
+            android:textColor="#000"
+            android:textSize="24sp" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+        <Button
+            android:id="@+id/boardButton0"
+            android:tag="0"
+            style="@style/BoardButton"
+            android:layout_column="0"/>
+
+        <Button
+            android:id="@+id/boardButton1"
+            android:tag="1"
+            style="@style/BoardButton"
+            android:layout_column="1"/>
+
+        <Button
+            android:id="@+id/boardButton2"
+            android:tag="2"
+            style="@style/BoardButton"
+            android:layout_column="2"
+             />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+        <Button
+            android:id="@+id/boardButton3"
+            android:tag="3"
+            style="@style/BoardButton"
+            android:layout_column="0"/>
+
+        <Button
+            android:id="@+id/boardButton4"
+            android:tag="4"
+            style="@style/BoardButton"
+            android:layout_column="1"/>
+
+        <Button
+            android:id="@+id/boardButton5"
+            android:tag="5"
+            style="@style/BoardButton"
+            android:layout_column="2"/>
+    </TableRow>
+
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+        <Button
+            android:id="@+id/boardButton6"
+            android:tag="6"
+            style="@style/BoardButton"
+            android:layout_column="0"/>
+
+        <Button
+            android:id="@+id/boardButton7"
+            android:tag="7"
+            style="@style/BoardButton"
+            android:layout_column="1"/>
+
+        <Button
+            android:id="@+id/boardButton8"
+            android:tag="8"
+            style="@style/BoardButton"
+            android:layout_column="2"/>
+    </TableRow>
+</TableLayout>
