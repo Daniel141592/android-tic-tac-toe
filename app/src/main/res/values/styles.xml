@@ -2,7 +2,7 @@
 
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimaryDark">@color/colorAccent</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
@@ -20,6 +20,7 @@
         <item name="android:layout_width">100dp</item>
         <item name="android:gravity">center</item>
         <item name="android:background">@drawable/board_button</item>
+        <item name="android:textSize">40sp</item>
     </style>
 
 </resources>

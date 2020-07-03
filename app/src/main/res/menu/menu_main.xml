@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.daniel.tic_tac_toe.MainActivity">
+    <item
+        android:id="@+id/menu_share"
+        android:title="@string/share"
+        android:icon="@drawable/baseline_share_white_24"
+        app:showAsAction="always"
+        android:visible="false"/>
+</menu>

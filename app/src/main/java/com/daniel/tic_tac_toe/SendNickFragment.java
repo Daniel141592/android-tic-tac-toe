@@ -52,7 +52,17 @@ public class SendNickFragment extends Fragment {
             if (room == null)
                 return;
             if (room.isCanPlay()) {
+                if (room.getRoomID() != null)
+                    viewModel.setRoomID(room.getRoomID());
                 navController.navigate(R.id.action_sendNickFragment_to_boardFragment);
+                viewModel.setConnectionStatus(ConnectionStatus.CONNECTED);
+            } else if (!room.isCanJoin()) {
+                if (viewModel.getConnectionStatus() == ConnectionStatus.CONNECTING) {
+                    Snackbar.make(view, R.string.room_full_or_doesnt_exists, Snackbar.LENGTH_LONG).show();
+                    navController.popBackStack(R.id.joinRoomFragment, false);
+                } else {
+                    Snackbar.make(view, R.string.creating_room_error, Snackbar.LENGTH_LONG).show();
+                }
             }
         });
 

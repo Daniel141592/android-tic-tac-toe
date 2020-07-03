@@ -1,9 +1,5 @@
 package com.daniel.tic_tac_toe;
 
-import android.util.Log;
-
-import java.io.IOException;
-
 import androidx.lifecycle.MutableLiveData;
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
@@ -17,7 +13,6 @@ public class GameRepository implements Callback<Room> {
     private MutableLiveData<Boolean> error;
     private int roomID;
     private GameService gameService;
-    private static final String TAG = "KOLKOKRZYZ";
 
     public GameRepository(final String BASE_URL) {
         room = new MutableLiveData<>();
@@ -36,18 +31,21 @@ public class GameRepository implements Callback<Room> {
             error.setValue(false);
             room.setValue(response.body());
         } else {
-            try {
-                error.setValue(true);
-                Log.d(TAG, response.errorBody().string());
-            } catch (IOException e) {}
+            error.setValue(true);
         }
     }
 
     @Override
     public void onFailure(Call<Room> call, Throwable t) {
-        Log.d(TAG, "cos poszło nie tak");
-        Log.d(TAG, t.getMessage());
         error.setValue(true);
+    }
+
+    public int getRoomID() {
+        return roomID;
+    }
+
+    public void setRoomID(int roomID) {
+        this.roomID = roomID;
     }
 
     public void status() {

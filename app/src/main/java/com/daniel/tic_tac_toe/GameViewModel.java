@@ -1,19 +1,50 @@
 package com.daniel.tic_tac_toe;
 
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
+import android.app.Application;
+import android.os.Handler;
 
-public class GameViewModel extends ViewModel {
+import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.MutableLiveData;
+
+public class GameViewModel extends AndroidViewModel {
     private ConnectionStatus connectionStatus;
     private GameRepository repository;
-    private static final String BASE_URL = "http://test.node.server:3000/api/";
+    private static final int INTERVAL = 1000;
+    private Handler handler;
+    private Runnable runnable = this::refresh;
+    private boolean refreshing;
 
-    public GameViewModel() {
-        repository = new GameRepository(BASE_URL);
+    public GameViewModel(Application application) {
+        super(application);
+        repository = new GameRepository(application.getString(R.string.url));
+        handler = new Handler();
+        refreshing = false;
     }
 
-    public void status() {
+    public int getRoomID() {
+        return repository.getRoomID();
+    }
+
+    public void setRoomID(int roomID) {
+        repository.setRoomID(roomID);
+    }
+
+    private void refresh() {
+        if (!refreshing)
+            return;
         repository.status();
+        handler.postDelayed(runnable, INTERVAL);
+    }
+
+    public void startRefreshing() {
+        if (!refreshing) {
+            refreshing = true;
+            refresh();
+        }
+    }
+
+    public void stopRefreshing() {
+        refreshing = false;
     }
 
     public void checkIfCanJoinRoom(int roomID) {
