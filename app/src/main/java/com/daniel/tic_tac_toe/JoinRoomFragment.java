@@ -13,6 +13,8 @@ import androidx.navigation.Navigation;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.widget.Button;
 import android.widget.EditText;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -29,11 +31,23 @@ public class JoinRoomFragment extends Fragment {
         GameViewModel viewModel = new ViewModelProvider(requireActivity()).get(GameViewModel.class);
         NavController navController = Navigation.findNavController(view);
 
-        view.findViewById(R.id.button_join_room).setOnClickListener(v -> {
-            EditText editText = view.findViewById(R.id.editText_roomID);
-            if (!editText.getText().toString().trim().equals("")) {
+        Button sendButton = view.findViewById(R.id.button_join_room);
+        EditText editText = view.findViewById(R.id.editText_roomID);
+        sendButton.setOnClickListener(v -> {
+            String str = editText.getText().toString().trim();
+            if (!str.equals("")) {
                 viewModel.checkIfCanJoinRoom(Integer.parseInt(editText.getText().toString().trim()));
+            } else {
+                Snackbar.make(view, R.string.empty_edittext, Snackbar.LENGTH_SHORT).show();
             }
+        });
+
+        editText.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_SEND) {
+                sendButton.performClick();
+                return true;
+            }
+            return false;
         });
 
         viewModel.getRoom().observe(getViewLifecycleOwner(), room -> {

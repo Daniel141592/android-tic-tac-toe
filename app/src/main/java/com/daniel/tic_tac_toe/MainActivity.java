@@ -3,10 +3,12 @@ package com.daniel.tic_tac_toe;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -20,6 +22,15 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         viewModel = new ViewModelProvider(this).get(GameViewModel.class);
+
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        Intent intent = getIntent();
+        if (intent.getAction().equals(Intent.ACTION_VIEW)) {
+            Uri data = intent.getData();
+            viewModel.setConnectionStatus(ConnectionStatus.CONNECTING);
+            navController.navigate(R.id.joinRoomFragment);
+            viewModel.checkIfCanJoinRoom(Integer.parseInt(data.toString().substring(data.toString().lastIndexOf("/")+1)));
+        }
     }
 
     @Override
@@ -37,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
             sendIntent.setAction(Intent.ACTION_SEND);
             String text = room.getNicks()[room.getPlayerNumber()]+" "+getString(R.string.invitation_text)+"\n"+
                         getString(R.string.share_url)+viewModel.getRoomID();
-            Log.d("PAPIERKAMIEN", text);
             sendIntent.putExtra(Intent.EXTRA_TEXT, text);
             sendIntent.setType("text/plain");
             startActivity(Intent.createChooser(sendIntent, null));

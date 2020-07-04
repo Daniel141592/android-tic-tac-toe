@@ -13,6 +13,8 @@ import androidx.navigation.Navigation;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -33,8 +35,9 @@ public class SendNickFragment extends Fragment {
         if (viewModel.getConnectionStatus() == ConnectionStatus.CONNECTING)
             textView.setText(R.string.join_room_text);
 
-        view.findViewById(R.id.button_send_nick).setOnClickListener(v -> {
-            EditText editText = view.findViewById(R.id.editText_nick);
+        Button sendButton = view.findViewById(R.id.button_send_nick);
+        EditText editText = view.findViewById(R.id.editText_nick);
+        sendButton.setOnClickListener(v -> {
             String str = editText.getText().toString().trim();
             if (!str.equals("")) {
                 if (viewModel.getConnectionStatus() == ConnectionStatus.CREATING_ROOM) {
@@ -45,6 +48,14 @@ public class SendNickFragment extends Fragment {
             } else {
                 Snackbar.make(view, R.string.empty_edittext, Snackbar.LENGTH_SHORT).show();
             }
+        });
+
+        editText.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_SEND) {
+                sendButton.performClick();
+                return true;
+            }
+            return false;
         });
 
         NavController navController = Navigation.findNavController(view);

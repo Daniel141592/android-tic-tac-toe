@@ -2,15 +2,15 @@ package com.daniel.tic_tac_toe;
 
 public class RequestParam {
     private String nick;
-    private Integer b;
+    private Integer position;
 
     public RequestParam(String param) {
         this.nick = param;
-        this.b = null;
+        this.position = null;
     }
 
     public RequestParam(int param) {
         this.nick = null;
-        this.b = param;
+        this.position = param;
     }
 }

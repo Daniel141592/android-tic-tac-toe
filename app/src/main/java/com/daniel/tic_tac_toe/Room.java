@@ -2,7 +2,7 @@ package com.daniel.tic_tac_toe;
 
 public class Room {
     private boolean canJoin, canPlay, draw;
-    private Integer[] b;
+    private Integer[] board;
     private String[] nicks;
     private Integer playerNumber, turn, winner, roomID;
 
@@ -14,8 +14,8 @@ public class Room {
         return canPlay;
     }
 
-    public Integer[] getB() {
-        return b;
+    public Integer[] getBoard() {
+        return board;
     }
 
     public String[] getNicks() {

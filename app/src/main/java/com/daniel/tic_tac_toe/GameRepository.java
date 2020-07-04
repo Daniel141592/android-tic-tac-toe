@@ -30,14 +30,15 @@ public class GameRepository implements Callback<Room> {
         if (response.isSuccessful()) {
             error.setValue(false);
             room.setValue(response.body());
-        } else {
+        } else if (!error.getValue()) { //no need to set an error if it is already set
             error.setValue(true);
         }
     }
 
     @Override
     public void onFailure(Call<Room> call, Throwable t) {
-        error.setValue(true);
+        if (!error.getValue())
+            error.setValue(true);
     }
 
     public int getRoomID() {
@@ -65,8 +66,8 @@ public class GameRepository implements Callback<Room> {
         gameService.create(new RequestParam(nick)).enqueue(this);
     }
 
-    public void update(int b) {
-        gameService.update(new RequestParam(b)).enqueue(this);
+    public void update(int position) {
+        gameService.update(new RequestParam(position)).enqueue(this);
     }
 
     public MutableLiveData<Room> getRoom() {

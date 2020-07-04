@@ -59,8 +59,8 @@ public class GameViewModel extends AndroidViewModel {
         repository.create(nick);
     }
 
-    public void update(int b) {
-        repository.update(b);
+    public void update(int position) {
+        repository.update(position);
     }
 
     public MutableLiveData<Room> getRoom() {

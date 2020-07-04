@@ -68,10 +68,10 @@ public class BoardFragment extends Fragment {
                 }
                 message.setText(str);
 
-                for (int i = 0; i < room.getB().length; i++) {
-                    if (room.getB()[i] != null) {
-                        buttons[i].setText(room.getB()[i] == 0 ? "×" : "⃝");
-                        buttons[i].setTextColor(room.getB()[i].equals(room.getPlayerNumber()) ? Color.RED : Color.BLACK);
+                for (int i = 0; i < room.getBoard().length; i++) {
+                    if (room.getBoard()[i] != null) {
+                        buttons[i].setText(room.getBoard()[i] == 0 ? "×" : "⃝");
+                        buttons[i].setTextColor(room.getBoard()[i].equals(room.getPlayerNumber()) ? Color.RED : Color.BLACK);
                     }
                 }
             }

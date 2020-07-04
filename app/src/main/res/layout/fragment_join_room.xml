@@ -8,17 +8,17 @@
 
     <EditText
         android:id="@+id/editText_roomID"
-        android:layout_width="238dp"
+        android:layout_width="240dp"
         android:layout_height="wrap_content"
         android:hint="@string/join_room_hint"
         android:imeOptions="actionSend"
         android:inputType="number"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.323"
+        app:layout_constraintVertical_bias="0.3"
         android:autofillHints="" />
 
     <Button
@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:text="@string/join_room"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText_roomID" />
 
@@ -39,8 +39,8 @@
         android:textColor="#000"
         app:layout_constraintBottom_toTopOf="@+id/editText_roomID"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.244"
+        app:layout_constraintHorizontal_bias="0.250"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.492" />
+        app:layout_constraintVertical_bias="0.5" />
 </androidx.constraintlayout.widget.ConstraintLayout>
