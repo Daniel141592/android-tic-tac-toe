@@ -37,7 +37,7 @@ public class GameRepository implements Callback<Room> {
 
     @Override
     public void onFailure(Call<Room> call, Throwable t) {
-        if (!error.getValue())
+        if (error.getValue() == null || !error.getValue())
             error.setValue(true);
     }
 
