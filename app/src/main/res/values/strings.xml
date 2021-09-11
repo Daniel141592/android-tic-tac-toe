@@ -3,6 +3,7 @@
     <!ENTITY appname "Kółko i krzyżyk">
     <!ENTITY hostname "test.node.server">
     <!ENTITY port "3000">
+    <!ENTITY ws_port "3300">
 ]>
 <resources>
     <string name="app_name">&appname;</string>
@@ -17,6 +18,7 @@
     <string name="create">Utwórz</string>
     <string name="url">http://&hostname;:&port;/api/</string>
     <string name="share_url">http://&hostname;:&port;/</string>
+    <string name="ws_url">ws://&hostname;:&ws_port;</string>
     <string name="hostname">&hostname;</string>
     <string name="kolko">Teraz kółko</string>
     <string name="krzyzyk">Teraz krzyżyk</string>

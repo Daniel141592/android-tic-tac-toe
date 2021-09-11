@@ -1,7 +1,6 @@
 package com.daniel.tic_tac_toe;
 
 import android.app.Application;
-import android.os.Handler;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
@@ -9,16 +8,16 @@ import androidx.lifecycle.MutableLiveData;
 public class GameViewModel extends AndroidViewModel {
     private ConnectionStatus connectionStatus;
     private GameRepository repository;
-    private static final int INTERVAL = 1000;
-    private Handler handler;
-    private Runnable runnable = this::refresh;
-    private boolean refreshing;
+    private WebSocketsRepository webSocketsRepository;
 
     public GameViewModel(Application application) {
         super(application);
         repository = new GameRepository(application.getString(R.string.url));
-        handler = new Handler();
-        refreshing = false;
+    }
+
+    private void startPlayingGame() {
+        webSocketsRepository = new WebSocketsRepository(getApplication().getString(R.string.ws_url), repository.getOkHttpClient());
+        webSocketsRepository.startListening();
     }
 
     public int getRoomID() {
@@ -27,24 +26,6 @@ public class GameViewModel extends AndroidViewModel {
 
     public void setRoomID(int roomID) {
         repository.setRoomID(roomID);
-    }
-
-    private void refresh() {
-        if (!refreshing)
-            return;
-        repository.status();
-        handler.postDelayed(runnable, INTERVAL);
-    }
-
-    public void startRefreshing() {
-        if (!refreshing) {
-            refreshing = true;
-            refresh();
-        }
-    }
-
-    public void stopRefreshing() {
-        refreshing = false;
     }
 
     public void checkIfCanJoinRoom(int roomID) {
@@ -60,12 +41,14 @@ public class GameViewModel extends AndroidViewModel {
     }
 
     public void update(int position) {
-        repository.update(position);
+        webSocketsRepository.update(position);
     }
 
     public MutableLiveData<Room> getRoom() {
-        return repository.getRoom();
+        return webSocketsRepository.getRoom();
     }
+
+    public  MutableLiveData<StartGameRequest> getStartGameRequest() { return repository.getStartGameRequest(); }
 
     public MutableLiveData<Boolean> getError() {
         return repository.getError();
@@ -77,5 +60,7 @@ public class GameViewModel extends AndroidViewModel {
 
     public void setConnectionStatus(ConnectionStatus connectionStatus) {
         this.connectionStatus = connectionStatus;
+        if (this.connectionStatus == ConnectionStatus.CONNECTED)
+            startPlayingGame();
     }
 }

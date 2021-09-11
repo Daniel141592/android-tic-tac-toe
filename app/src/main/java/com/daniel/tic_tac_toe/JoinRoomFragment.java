@@ -50,10 +50,10 @@ public class JoinRoomFragment extends Fragment {
             return false;
         });
 
-        viewModel.getRoom().observe(getViewLifecycleOwner(), room -> {
-            if (room == null)
+        viewModel.getStartGameRequest().observe(getViewLifecycleOwner(), startGameRequest -> {
+            if (startGameRequest == null)
                 return;
-            if (room.isCanJoin()) {
+            if (startGameRequest.isCanJoin()) {
                 navController.navigate(R.id.action_joinRoomFragment_to_sendNickFragment);
             } else {
                 Snackbar.make(view, R.string.room_full_or_doesnt_exists, Snackbar.LENGTH_LONG).show();

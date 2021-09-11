@@ -1,18 +1,10 @@
 package com.daniel.tic_tac_toe;
 
 public class Room {
-    private boolean canJoin, canPlay, draw;
+    private boolean draw;
     private Integer[] board;
     private String[] nicks;
     private Integer playerNumber, turn, winner, roomID;
-
-    public boolean isCanJoin() {
-        return canJoin;
-    }
-
-    public boolean isCanPlay() {
-        return canPlay;
-    }
 
     public Integer[] getBoard() {
         return board;

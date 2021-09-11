@@ -25,7 +25,7 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         GameViewModel viewModel = new ViewModelProvider(requireActivity()).get(GameViewModel.class);
         viewModel.setConnectionStatus(ConnectionStatus.NOT_CONNECTED);
-        viewModel.getRoom().setValue(null);
+        viewModel.getStartGameRequest().setValue(null);
         getActivity().setTitle(R.string.app_name);
 
         NavController navController = Navigation.findNavController(view);
