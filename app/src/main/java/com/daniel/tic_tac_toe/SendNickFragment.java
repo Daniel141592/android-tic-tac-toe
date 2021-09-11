@@ -59,15 +59,15 @@ public class SendNickFragment extends Fragment {
         });
 
         NavController navController = Navigation.findNavController(view);
-        viewModel.getRoom().observe(getViewLifecycleOwner(), room -> {
-            if (room == null)
+        viewModel.getStartGameRequest().observe(getViewLifecycleOwner(), startGameRequest -> {
+            if (startGameRequest == null)
                 return;
-            if (room.isCanPlay()) {
-                if (room.getRoomID() != null)
-                    viewModel.setRoomID(room.getRoomID());
+            if (startGameRequest.isCanPlay()) {
+                if (startGameRequest.getRoomID() != null)
+                    viewModel.setRoomID(startGameRequest.getRoomID());
                 navController.navigate(R.id.action_sendNickFragment_to_boardFragment);
                 viewModel.setConnectionStatus(ConnectionStatus.CONNECTED);
-            } else if (!room.isCanJoin()) {
+            } else if (!startGameRequest.isCanJoin()) {
                 if (viewModel.getConnectionStatus() == ConnectionStatus.CONNECTING) {
                     Snackbar.make(view, R.string.room_full_or_doesnt_exists, Snackbar.LENGTH_LONG).show();
                     navController.popBackStack(R.id.joinRoomFragment, false);

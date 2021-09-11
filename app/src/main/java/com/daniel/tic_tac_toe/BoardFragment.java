@@ -48,7 +48,6 @@ public class BoardFragment extends Fragment {
             buttons[i] = view.findViewWithTag(Integer.toString(i));
             buttons[i].setOnClickListener(listener);
         }
-        viewModel.startRefreshing();
 
         TextView message = view.findViewById(R.id.textMessage);
         viewModel.getRoom().observe(getViewLifecycleOwner(), room -> {
@@ -85,7 +84,7 @@ public class BoardFragment extends Fragment {
         requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
-                viewModel.stopRefreshing();
+                //viewModel.stopRefreshing();
                 navController.popBackStack(R.id.homeFragment, false);
             }
         });
