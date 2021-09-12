@@ -1,5 +1,8 @@
 package com.daniel.tic_tac_toe;
 
+/**
+ * Simple class representing room - response from server during the game.
+ */
 public class Room {
     private boolean draw;
     private Integer[] board;

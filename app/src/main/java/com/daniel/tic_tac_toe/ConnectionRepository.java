@@ -9,17 +9,24 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class ConnectionRepository implements Callback<StartGameRequest> {
-    private MutableLiveData<StartGameRequest> startGameRequest;
-    private MutableLiveData<Boolean> error;
+/**
+ * Class manages connection (joining a game or starting new).
+ * Stores MutableLiveData for servers response and errors.
+ */
+public class ConnectionRepository implements Callback<StartGameResponse> {
+    private final MutableLiveData<StartGameResponse> startGameRequest;
+    private final MutableLiveData<Boolean> error;
     private int roomID;
-    private GameService gameService;
-    private OkHttpClient okHttpClient;
+    private final GameService gameService;
 
-    public ConnectionRepository(final String BASE_URL) {
+    /**
+     * Create retrofit object to manage connection in constructor.
+     * @param BASE_URL - base URL of api endpoint
+     * @param okHttpClient - client using to connect
+     */
+    public ConnectionRepository(final String BASE_URL, OkHttpClient okHttpClient) {
         startGameRequest = new MutableLiveData<>();
         error = new MutableLiveData<>();
-        okHttpClient = new OkHttpClient().newBuilder().cookieJar(new MyCookieJar()).build();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .client(okHttpClient)
@@ -29,7 +36,7 @@ public class ConnectionRepository implements Callback<StartGameRequest> {
     }
 
     @Override
-    public void onResponse(Call<StartGameRequest> call, Response<StartGameRequest> response) {
+    public void onResponse(Call<StartGameResponse> call, Response<StartGameResponse> response) {
         if (response.isSuccessful()) {
             error.setValue(false);
             startGameRequest.setValue(response.body());
@@ -39,7 +46,7 @@ public class ConnectionRepository implements Callback<StartGameRequest> {
     }
 
     @Override
-    public void onFailure(Call<StartGameRequest> call, Throwable t) {
+    public void onFailure(Call<StartGameResponse> call, Throwable t) {
         if (error.getValue() == null || !error.getValue())
             error.setValue(true);
     }
@@ -65,13 +72,11 @@ public class ConnectionRepository implements Callback<StartGameRequest> {
         gameService.create(new RequestParam(nick)).enqueue(this);
     }
 
-    public MutableLiveData<StartGameRequest> getStartGameRequest() {
+    public MutableLiveData<StartGameResponse> getStartGameRequest() {
         return startGameRequest;
     }
 
     public MutableLiveData<Boolean> getError() {
         return error;
     }
-
-    public OkHttpClient getOkHttpClient() { return okHttpClient; }
 }

@@ -5,18 +5,32 @@ import android.app.Application;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
+import okhttp3.OkHttpClient;
+
+/**
+ * ViewModel class. Stores instances of ConnectionRepository and WebSocketsRepository.
+ */
 public class GameViewModel extends AndroidViewModel {
     private ConnectionStatus connectionStatus;
     private ConnectionRepository connectionRepository;
     private WebSocketsRepository webSocketsRepository;
+    private OkHttpClient okHttpClient;
 
+    /**
+     * OkHttpClient object is created here and passed to connectionRepository.
+     * @param application - Application object.
+     */
     public GameViewModel(Application application) {
         super(application);
-        connectionRepository = new ConnectionRepository(application.getString(R.string.url));
+        okHttpClient = new OkHttpClient().newBuilder().cookieJar(new MyCookieJar()).build();
+        connectionRepository = new ConnectionRepository(application.getString(R.string.url), okHttpClient);
     }
 
+    /**
+     * Create instance of WebSocketsRepository to start using websockets to update the game.
+     */
     private void startPlayingGame() {
-        webSocketsRepository = new WebSocketsRepository(getApplication().getString(R.string.ws_url), connectionRepository.getOkHttpClient());
+        webSocketsRepository = new WebSocketsRepository(getApplication().getString(R.string.ws_url), okHttpClient);
         webSocketsRepository.startListening();
     }
 
@@ -48,7 +62,7 @@ public class GameViewModel extends AndroidViewModel {
         return webSocketsRepository.getRoom();
     }
 
-    public MutableLiveData<StartGameRequest> getStartGameRequest() { return connectionRepository.getStartGameRequest(); }
+    public MutableLiveData<StartGameResponse> getStartGameRequest() { return connectionRepository.getStartGameRequest(); }
 
     public MutableLiveData<Boolean> getError() {
         return connectionRepository.getError();

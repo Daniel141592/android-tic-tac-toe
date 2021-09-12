@@ -11,10 +11,19 @@ import com.tinder.scarlet.websocket.okhttp.OkHttpClientUtils;
 
 import okhttp3.OkHttpClient;
 
+/**
+ * Class manages the Game using websockets (update the board and change info text).
+ * Stores MutableLiveData for room details.
+ */
 public class WebSocketsRepository {
     private final WebSocketsService webSocketsService;
     private final MutableLiveData<Room> roomMutableLiveData;
 
+    /**
+     * Websockets connection created here using Scarlet.
+     * @param WS_URL - URL used by websockets server
+     * @param okHttpClient - http Client, must be the same that was used in pre-game connection.
+     */
     public WebSocketsRepository(String WS_URL, OkHttpClient okHttpClient) {
         roomMutableLiveData = new MutableLiveData<>();
         Scarlet scarletInstance = new Scarlet.Builder()

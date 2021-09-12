@@ -84,7 +84,6 @@ public class BoardFragment extends Fragment {
         requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
-                //viewModel.stopRefreshing();
                 navController.popBackStack(R.id.homeFragment, false);
             }
         });
