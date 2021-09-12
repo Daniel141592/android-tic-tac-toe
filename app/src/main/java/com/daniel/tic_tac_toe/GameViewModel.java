@@ -7,37 +7,37 @@ import androidx.lifecycle.MutableLiveData;
 
 public class GameViewModel extends AndroidViewModel {
     private ConnectionStatus connectionStatus;
-    private GameRepository repository;
+    private ConnectionRepository connectionRepository;
     private WebSocketsRepository webSocketsRepository;
 
     public GameViewModel(Application application) {
         super(application);
-        repository = new GameRepository(application.getString(R.string.url));
+        connectionRepository = new ConnectionRepository(application.getString(R.string.url));
     }
 
     private void startPlayingGame() {
-        webSocketsRepository = new WebSocketsRepository(getApplication().getString(R.string.ws_url), repository.getOkHttpClient());
+        webSocketsRepository = new WebSocketsRepository(getApplication().getString(R.string.ws_url), connectionRepository.getOkHttpClient());
         webSocketsRepository.startListening();
     }
 
     public int getRoomID() {
-        return repository.getRoomID();
+        return connectionRepository.getRoomID();
     }
 
     public void setRoomID(int roomID) {
-        repository.setRoomID(roomID);
+        connectionRepository.setRoomID(roomID);
     }
 
     public void checkIfCanJoinRoom(int roomID) {
-        repository.checkIfCanJoinRoom(roomID);
+        connectionRepository.checkIfCanJoinRoom(roomID);
     }
 
     public void joinRoom(String nick) {
-        repository.joinRoom(nick);
+        connectionRepository.joinRoom(nick);
     }
 
     public void create(String nick) {
-        repository.create(nick);
+        connectionRepository.create(nick);
     }
 
     public void update(int position) {
@@ -48,10 +48,10 @@ public class GameViewModel extends AndroidViewModel {
         return webSocketsRepository.getRoom();
     }
 
-    public  MutableLiveData<StartGameRequest> getStartGameRequest() { return repository.getStartGameRequest(); }
+    public MutableLiveData<StartGameRequest> getStartGameRequest() { return connectionRepository.getStartGameRequest(); }
 
     public MutableLiveData<Boolean> getError() {
-        return repository.getError();
+        return connectionRepository.getError();
     }
 
     public ConnectionStatus getConnectionStatus() {

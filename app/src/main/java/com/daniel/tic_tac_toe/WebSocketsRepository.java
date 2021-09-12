@@ -12,8 +12,8 @@ import com.tinder.scarlet.websocket.okhttp.OkHttpClientUtils;
 import okhttp3.OkHttpClient;
 
 public class WebSocketsRepository {
-    private WebSocketsService webSocketsService;
-    private MutableLiveData<Room> roomMutableLiveData;
+    private final WebSocketsService webSocketsService;
+    private final MutableLiveData<Room> roomMutableLiveData;
 
     public WebSocketsRepository(String WS_URL, OkHttpClient okHttpClient) {
         roomMutableLiveData = new MutableLiveData<>();
@@ -31,10 +31,7 @@ public class WebSocketsRepository {
 
     @SuppressLint("CheckResult")
     public void startListening() {
-        webSocketsService.observe()
-                .subscribe(room -> {
-                    roomMutableLiveData.postValue(room);
-                });
+        webSocketsService.observe().subscribe(roomMutableLiveData::postValue);
     }
 
     public MutableLiveData<Room> getRoom() { return roomMutableLiveData; }

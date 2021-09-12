@@ -9,14 +9,14 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class GameRepository implements Callback<StartGameRequest> {
+public class ConnectionRepository implements Callback<StartGameRequest> {
     private MutableLiveData<StartGameRequest> startGameRequest;
     private MutableLiveData<Boolean> error;
     private int roomID;
     private GameService gameService;
     private OkHttpClient okHttpClient;
 
-    public GameRepository(final String BASE_URL) {
+    public ConnectionRepository(final String BASE_URL) {
         startGameRequest = new MutableLiveData<>();
         error = new MutableLiveData<>();
         okHttpClient = new OkHttpClient().newBuilder().cookieJar(new MyCookieJar()).build();
